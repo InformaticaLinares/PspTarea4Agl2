@@ -57,7 +57,7 @@ public class LectorSocket {
             System.out.println("Consumidor "+id+". Nº Leido: "+num);
             entrada.close();
         } catch (IOException e) {
-            //System.err.println("Error al leer del canal");
+            System.out.println("Error al leer del canal");
             //System.err.println(e.toString()); //descripcion de lo que pasa
         }
 
