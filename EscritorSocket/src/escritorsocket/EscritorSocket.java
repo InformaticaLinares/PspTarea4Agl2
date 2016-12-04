@@ -45,8 +45,8 @@ public class EscritorSocket {
                 salidaStream.flush(); //Limpio el canal
                 salidaStream.close(); //cierro el Stream del canal. No genera excepcio0
             } catch (Exception e) {
-                System.err.println("Error de conexión o al escribir en el canal");
-                System.err.print(e.toString());
+               // System.err.println("Error de conexión o al escribir en el canal");
+               // System.err.print(e.toString());
             }
 
             try {
