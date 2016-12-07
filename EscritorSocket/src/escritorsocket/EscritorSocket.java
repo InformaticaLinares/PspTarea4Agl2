@@ -19,7 +19,7 @@ public class EscritorSocket {
         Socket canal = null;   // Socket para establecer el canal
         PrintWriter salidaStream;
         int aux = 1;
-        while (aux < 100) {
+        while (aux <= 100) {
             try {
                 conexion = new ServerSocket(12500);
                 //Pido al SO que abra el puerto 12500 para la escucha de la conexion
@@ -28,7 +28,7 @@ public class EscritorSocket {
                 System.err.print(e.toString());
                 System.exit(-1);
             }
-            
+
             try {
                 System.out.println("Proceso escritor esperando conexión del proceso lector");
                 //Como estoy esperando al otro proceso, tengo que hacer esperar a este
@@ -38,15 +38,15 @@ public class EscritorSocket {
                 //a partir del estream de salida del socket o canal de comunicacion
 
                 salidaStream = new PrintWriter(canal.getOutputStream());
-                aux++;
-                salidaStream.println(aux);
 
+                salidaStream.println(aux);
+                aux++;
                 //Mando el mensaje
                 salidaStream.flush(); //Limpio el canal
                 salidaStream.close(); //cierro el Stream del canal. No genera excepcio0
             } catch (Exception e) {
-               // System.err.println("Error de conexión o al escribir en el canal");
-               // System.err.print(e.toString());
+                // System.err.println("Error de conexión o al escribir en el canal");
+                // System.err.print(e.toString());
             }
 
             try {

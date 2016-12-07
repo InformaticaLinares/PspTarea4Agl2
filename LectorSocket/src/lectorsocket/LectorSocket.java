@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package lectorsocket;
+
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -11,38 +12,46 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/*** @author Marina
+
+/**
+ * * @author Marina
  */
 public class LectorSocket {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         Socket canal = null; //Socket para el canal de conexión con el escritor
         BufferedReader entrada = null; // Buffer para leer del stream
         String datosEntrada;  //para los valores que vamos leyendo del canal
         int id = Integer.parseInt(args[0]);
-        boolean conex=false;
+        boolean conex = false;
         int num;
         String fichlog = "Resultado.txt";
+        String ficherr = "Errores.txt";
         PrintStream ps = null;
+        PrintStream pe = null;
         try {
             ps = new PrintStream(
                     new BufferedOutputStream(new FileOutputStream(
-                                    new File(fichlog), true)), true);
+                            new File(fichlog), true)), true);
+            pe = new PrintStream(
+                    new BufferedOutputStream(new FileOutputStream(
+                            new File(ficherr), true)), true);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
         } finally {
             System.setOut(ps);
-            System.setErr(ps);
+            System.setErr(pe);
         }
-        
-        
-        while (conex==false) {
+        ps.flush();
+        pe.flush();
+        while (conex == false) {
             try {
                 //Pido conexión al equipo a través del puerto 12500, donde escucha el escritor
                 canal = new Socket("localhost", 12500);
-                conex=true;
+                conex = true;
             } catch (Exception e) {
-                conex=false;
+                System.err.println("Consumidor " + id + ". Error al conectar");
+                conex = false;
                 Thread.sleep(500);
             }
         }
@@ -54,20 +63,16 @@ public class LectorSocket {
             datosEntrada = entrada.readLine();
 
             num = Integer.parseInt(datosEntrada);
-            System.out.println("Consumidor "+id+". Nº Leido: "+num);
+            System.out.println("Consumidor " + id + ". Nº Leido: " + num);
+
             entrada.close();
+
         } catch (IOException e) {
-            System.out.println("Error al leer del canal");
+            System.out.println("Consumidor " + id + ". Error al leer del canal");
+
             //System.err.println(e.toString()); //descripcion de lo que pasa
         }
-
-        try {
-            canal.close();
-        } catch (IOException e) {
-            //System.err.println("Error de socket");
-            //System.err.println(e.toString());
-        }
-
+        canal.close();
     }
-    
+
 }
