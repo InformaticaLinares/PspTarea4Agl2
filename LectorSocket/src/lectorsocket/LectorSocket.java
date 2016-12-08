@@ -70,7 +70,7 @@ public class LectorSocket {
 
                 } catch (IOException e) {
                     Thread.sleep(100);
-                    System.out.println("\nConsumidor " + id + ". Error al leer del canal\n");
+                    System.err.println("\nConsumidor " + id + ". Error al leer del canal\n");
                     conex=false;
                     leido=false;
                     //System.err.println(e.toString()); //descripcion de lo que pasa
