@@ -24,8 +24,8 @@ public class EscritorSocket {
                 conexion = new ServerSocket(12500);
                 //Pido al SO que abra el puerto 12500 para la escucha de la conexion
             } catch (IOException e) {
-                System.err.println("No se puede abrir el puerto");
-                System.err.print(e.toString());
+                System.err.print("No se puede abrir el puerto:  ");
+                System.err.println(e.toString());
                 System.exit(-1);
             }
 
@@ -45,8 +45,8 @@ public class EscritorSocket {
                 salidaStream.flush(); //Limpio el canal
                 salidaStream.close(); //cierro el Stream del canal. No genera excepcio0
             } catch (Exception e) {
-                // System.err.println("Error de conexión o al escribir en el canal");
-                // System.err.print(e.toString());
+                System.err.print("Error de conexión o al escribir en el canal:  ");
+                System.err.println(e.toString());
             }
 
             try {

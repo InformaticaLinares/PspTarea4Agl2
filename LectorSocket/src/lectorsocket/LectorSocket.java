@@ -73,7 +73,7 @@ public class LectorSocket {
                     System.err.println("\nConsumidor " + id + ". Error al leer del canal\n");
                     conex=false;
                     leido=false;
-                    //System.err.println(e.toString()); //descripcion de lo que pasa
+                    System.err.println(e.toString()); //descripcion de lo que pasa
                 }
                 canal.close();
             }
